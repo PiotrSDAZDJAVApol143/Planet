@@ -17,4 +17,6 @@ public class SolarSystemPlanetDetailsResponse {
     private String discoveredBy;
     private Double semimajorAxis;
     private Double meanRadius;
+
+    //TODO: Tu ewentualnie można dodać jakieś nowe informacje i zastanowić się dlaczego discoveredBy - nie działa...
 }
