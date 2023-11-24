@@ -12,4 +12,12 @@ public class PlanetDataEntity {
     private boolean isPlanet;
     private PlanetParameters parameters;
 
+    public Integer getNumericId() {
+        try {
+            return Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
 }
