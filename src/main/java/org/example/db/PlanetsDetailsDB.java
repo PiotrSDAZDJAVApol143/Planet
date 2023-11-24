@@ -1,7 +1,10 @@
 package org.example.db;
 
+import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class PlanetsDetailsDB {
@@ -27,4 +30,16 @@ public class PlanetsDetailsDB {
         return false;
     }
 
+    public Optional<PlanetDataEntity> getPlanetByName(String planetName) {
+        PlanetDataEntity result = null;
+        for(var entry: dataBase.entrySet()) {
+            final PlanetDataEntity entity = entry.getValue();
+            final boolean isEquals = Objects.equals(entity.getEnglishName(),planetName);
+
+            if(isEquals){
+                result= entity;
+            }
+        }
+        return  Optional.ofNullable(result);
+    }
 }

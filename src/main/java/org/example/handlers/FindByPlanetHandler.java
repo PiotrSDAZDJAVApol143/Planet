@@ -1,6 +1,7 @@
 package org.example.handlers;
 
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
+import org.example.db.PlanetDataEntity;
 import org.example.services.PlanetService;
 
 import java.util.Scanner;
@@ -14,7 +15,8 @@ public class FindByPlanetHandler {
 
         final SolarSystemPlanetDetailsResponse solarSystemDetails;
         if(isThisPlanetCached(userInputPlanetToFind)){
-            solarSystemDetails = DATA_BASE.getPlanetByName();
+            final PlanetDataEntity planetByName = DATA_BASE.getPlanetByName(userInputPlanetToFind).orElseThrow();
+            solarSystemDetails =
         } else {
             solarSystemDetails = new PlanetService().getPlanetDetailsFromSystemeSolarie(userInputPlanetToFind);
         }String message = """
