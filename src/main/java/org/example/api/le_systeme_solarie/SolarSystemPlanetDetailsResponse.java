@@ -1,6 +1,5 @@
-package api.le_systeme_solarie;
+package org.example.api.le_systeme_solarie;
 
-import com.google.gson.JsonElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

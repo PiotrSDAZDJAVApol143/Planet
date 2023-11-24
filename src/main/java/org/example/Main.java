@@ -1,6 +1,8 @@
-import api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
-import db.PlanetsDetailsDB;
-import services.PlanetService;
+package org.example;
+
+import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
+import org.example.db.PlanetsDetailsDB;
+import org.example.services.PlanetService;
 
 import java.util.Scanner;
 

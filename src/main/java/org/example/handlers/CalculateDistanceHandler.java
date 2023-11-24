@@ -1,4 +1,4 @@
-package handlers;
+package org.example.handlers;
 
 public class CalculateDistanceHandler {
 }

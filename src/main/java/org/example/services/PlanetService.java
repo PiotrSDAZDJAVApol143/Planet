@@ -1,7 +1,7 @@
-package services;
+package org.example.services;
 
-import api.HttpClientService;
-import api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
+import org.example.api.HttpClientService;
+import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 
 public class PlanetService {
     public SolarSystemPlanetDetailsResponse getPlanetDetailsFromSystemeSolarie(String planetName) {

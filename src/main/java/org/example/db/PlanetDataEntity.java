@@ -1,6 +1,5 @@
-package db;
+package org.example.db;
 
-import api.le_systeme_solarie.Moon;
 import lombok.Getter;
 import lombok.Setter;
 

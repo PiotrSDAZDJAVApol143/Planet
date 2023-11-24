@@ -1,9 +1,10 @@
-package handlers;
+package org.example.handlers;
 
-import api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
-import services.PlanetService;
+import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
+import org.example.services.PlanetService;
 
 import java.util.Scanner;
+import static org.example.Main.DATA_BASE;
 
 public class FindByPlanetHandler {
     public void handle() {

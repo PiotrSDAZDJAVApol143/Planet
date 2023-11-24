@@ -1,4 +1,4 @@
-package api;
+package org.example.api;
 
 import com.google.gson.*;
 

@@ -1,6 +1,6 @@
-package db;
+package org.example.db;
 
-import api.le_systeme_solarie.Moon;
+import org.example.api.le_systeme_solarie.Moon;
 
 public class PlanetParameters {
     private String id;

@@ -1,4 +1,4 @@
-package db;
+package org.example.db;
 
 import java.util.HashMap;
 import java.util.Map;
