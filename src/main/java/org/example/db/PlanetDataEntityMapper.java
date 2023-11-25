@@ -1,5 +1,6 @@
 package org.example.db;
 
+import org.example.api.le_systeme_solarie.AroundPlanet;
 import org.example.api.le_systeme_solarie.Moon;
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 
@@ -13,10 +14,18 @@ public class PlanetDataEntityMapper {
         PlanetParameters parameters = new PlanetParameters(
                 dto.getNumericId(),
                 dto.getEnglishName(),
-                dto.getSemimajorAxis(),
+                dto.getBodyType(),
+                dto.isPlanet(),
                 dto.getMoons(),
+                dto.getAvgTemp(),
+                dto.getSideralOrbit(),
+                dto.getSideralRotation(),
                 dto.getGravity(),
-                dto.getMeanRadius()
+                dto.getDiscoveredBy(),
+                dto.getDiscoveryDate(),
+                dto.getSemimajorAxis(),
+                dto.getMeanRadius(),
+                dto.getAroundPlanet()
         );
         return new PlanetDataEntity(
                 parameters.getId(),
@@ -29,12 +38,27 @@ public class PlanetDataEntityMapper {
         final PlanetParameters planetParameters = entity.getParameters();
         return  new SolarSystemPlanetDetailsResponse(planetParameters.getId().toString(),
                 planetParameters.getEnglishName(),
-                entity.isPlanet(),
+                planetParameters.getBodyType(),
+                planetParameters.isPlanet(),
                 planetParameters.getMoons(),
+                planetParameters.getAvgTemp(),
+                planetParameters.getSideralOrbit(),
+                planetParameters.getSideralRotation(),
                 planetParameters.getGravity(),
-                null,
+                planetParameters.getDiscoveredBy(),
+                planetParameters.getDiscoveryDate(),
                 planetParameters.getSemimajorAxis(),
-                planetParameters.getMeanRadius()
+                planetParameters.getMeanRadius(),
+                null
+
         );
+    }
+
+    private static Moon[] mapMoons(List<Moon> moons) {
+        return moons.toArray(new Moon[0]);
+    }
+
+    private static List<Moon> mapMoonsToSolarResponse(Moon[] moons) {
+        return Arrays.asList(moons);
     }
 }

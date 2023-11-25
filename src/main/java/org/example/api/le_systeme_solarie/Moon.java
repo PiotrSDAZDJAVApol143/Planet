@@ -10,8 +10,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class Moon {
-    private String id;
-    private String englishName;
+    private String moon;
+
 
     //TODO: trzeba sprawdzić dlaczego klasa Moon nie działa w tablicy aby wypisywać przy funkcji detale:
     // np Jowisz - księżyce [ xxxxx]

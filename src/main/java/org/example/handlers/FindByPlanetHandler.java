@@ -31,15 +31,28 @@ public class FindByPlanetHandler {
         String message = """
                             ------------------------------
                             Planet/Moon details :
-                            - englishName:      [%s]
-                            - meanRadius:       [%s km]
-                            - semimajorAxis:    [%s km]
-                            - gravity:          [%s m/s²]
+                            - English name:        [%s]
+                            - Body type:           [%s]
+                            - meanRadius:          [%s km]
+                            - Average temperature: [%s K]
+                            - Average distance:    [%s km]
+                            - One year lasts:      [%s days]
+                            - One day lasts:       [%s h]
+                            - Gravity:             [%s m/s²]
+                            - Discovered by:       [%s]
+                            - Discovered date:     [%s]
                             """.formatted(
                 solarSystemDetails.getEnglishName(),
+                solarSystemDetails.getBodyType(),
                 solarSystemDetails.getMeanRadius(),
+                solarSystemDetails.getAvgTemp(),
                 solarSystemDetails.getSemimajorAxis(),
-                solarSystemDetails.getGravity());
+                solarSystemDetails.getSideralOrbit(),
+                solarSystemDetails.getSideralRotation(),
+                solarSystemDetails.getGravity(),
+                solarSystemDetails.getDiscoveredBy(),
+                solarSystemDetails.getDiscoveryDate()
+        );
         System.out.println(message);
     }
 

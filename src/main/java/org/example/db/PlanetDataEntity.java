@@ -16,11 +16,4 @@ public class PlanetDataEntity {
     private PlanetParameters parameters;
 
 }
-//
-//  public Integer getNumericId() {
-//      try {
-//          return Integer.parseInt(id);
-//      } catch (NumberFormatException e) {
-//          return null;
-//      }
-//  }
+
