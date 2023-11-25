@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 import org.example.db.PlanetsDetailsDB;
+import org.example.handlers.FindByPlanetHandler;
 import org.example.services.PlanetService;
 
 import java.util.Scanner;
@@ -18,11 +19,7 @@ public class Main {
 
             switch (userInput) {
                 case "Q" -> isRunning = false;
-                case "P" -> {
-                    final SolarSystemPlanetDetailsResponse planetDetailsFromSS = new PlanetService().getPlanetDetailsFromSystemeSolarie("jupiter");
-                    System.out.println("Planet Name: " + planetDetailsFromSS.getEnglishName() + planetDetailsFromSS.getGravity()+ planetDetailsFromSS.getDiscoveredBy()+ " " + planetDetailsFromSS.getMeanRadius() + " " + planetDetailsFromSS.getSemimajorAxis());
-
-                }
+                case "P" -> new FindByPlanetHandler().handle();
                 default -> System.out.println("ERROR!!! INVALID INPUT");
             }
             }
