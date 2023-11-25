@@ -16,7 +16,7 @@ public class FindByPlanetHandler {
         final SolarSystemPlanetDetailsResponse solarSystemDetails;
         if(isThisPlanetCached(userInputPlanetToFind)){
             final PlanetDataEntity planetByName = DATA_BASE.getPlanetByName(userInputPlanetToFind).orElseThrow();
-            solarSystemDetails =
+            solarSystemDetails = null;
         } else {
             solarSystemDetails = new PlanetService().getPlanetDetailsFromSystemeSolarie(userInputPlanetToFind);
         }String message = """
