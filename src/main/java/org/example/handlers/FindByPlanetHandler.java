@@ -41,6 +41,7 @@ public class FindByPlanetHandler {
                             - Gravity:             [%s m/s²]
                             - Discovered by:       [%s]
                             - Discovered date:     [%s]
+                            - Moons:               [%s]
                             """.formatted(
                 solarSystemDetails.getEnglishName(),
                 solarSystemDetails.getBodyType(),
@@ -51,7 +52,8 @@ public class FindByPlanetHandler {
                 solarSystemDetails.getSideralRotation(),
                 solarSystemDetails.getGravity(),
                 solarSystemDetails.getDiscoveredBy(),
-                solarSystemDetails.getDiscoveryDate()
+                solarSystemDetails.getDiscoveryDate(),
+                Arrays.toString(solarSystemDetails.getMoons())
         );
         System.out.println(message);
     }
