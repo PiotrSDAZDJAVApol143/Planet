@@ -1,11 +1,16 @@
 package org.example.handlers;
 
+import org.example.api.le_systeme_solarie.Moon;
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 import org.example.db.PlanetDataEntity;
 import org.example.db.PlanetDataEntityMapper;
 import org.example.services.PlanetService;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import static org.example.Main.DATA_BASE;
 
 public class FindByPlanetHandler {
@@ -14,20 +19,23 @@ public class FindByPlanetHandler {
         Scanner scPlanetToFind = new Scanner(System.in);
         String userInputPlanetToFind = scPlanetToFind.nextLine();
 
+
         final SolarSystemPlanetDetailsResponse solarSystemDetails;
-        if(isThisPlanetCached(userInputPlanetToFind)){
+        if (isThisPlanetCached(userInputPlanetToFind)) {
             final PlanetDataEntity planetByName = DATA_BASE.getPlanetByName(userInputPlanetToFind).orElseThrow();
             solarSystemDetails = PlanetDataEntityMapper.toSolarResponse(planetByName);
         } else {
             solarSystemDetails = new PlanetService().getPlanetDetailsFromSystemeSolarie(userInputPlanetToFind);
-        }String message = """
-							------------------------------
-							Planet/Moon details :
-							- englishName: 		[%s]
-							- meanRadius:		[%s km]
-							- semimajorAxis: 	[%s km]
-							- gravity: 		    [%s m/s²]
-							""".formatted(
+        }
+
+        String message = """
+                            ------------------------------
+                            Planet/Moon details :
+                            - englishName:      [%s]
+                            - meanRadius:       [%s km]
+                            - semimajorAxis:    [%s km]
+                            - gravity:          [%s m/s²]
+                            """.formatted(
                 solarSystemDetails.getEnglishName(),
                 solarSystemDetails.getMeanRadius(),
                 solarSystemDetails.getSemimajorAxis(),

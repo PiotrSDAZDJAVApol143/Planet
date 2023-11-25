@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @ToString
@@ -26,5 +28,6 @@ public class SolarSystemPlanetDetailsResponse {
             return null;
         }
     }
+
 
 }

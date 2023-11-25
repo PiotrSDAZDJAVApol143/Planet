@@ -4,6 +4,8 @@ import org.example.api.le_systeme_solarie.Moon;
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlanetDataEntityMapper {
 
