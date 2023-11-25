@@ -18,7 +18,7 @@ public class Main {
 
             switch (userInput) {
                 case "Q" -> isRunning = false;
-                case "Y" -> {
+                case "P" -> {
                     final SolarSystemPlanetDetailsResponse planetDetailsFromSS = new PlanetService().getPlanetDetailsFromSystemeSolarie("jupiter");
                     System.out.println("Planet Name: " + planetDetailsFromSS.getEnglishName() + planetDetailsFromSS.getGravity()+ planetDetailsFromSS.getDiscoveredBy()+ " " + planetDetailsFromSS.getMeanRadius() + " " + planetDetailsFromSS.getSemimajorAxis());
 

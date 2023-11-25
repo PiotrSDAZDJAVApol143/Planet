@@ -19,9 +19,9 @@ public class SolarSystemPlanetDetailsResponse {
     private Double meanRadius;
 
     //TODO: Tu ewentualnie można dodać jakieś nowe informacje i zastanowić się dlaczego discoveredBy - nie działa...
-    public Integer getNumericId() {
+    public Long getNumericId() {
         try {
-            return Integer.parseInt(id);
+            return Long.parseLong(id);
         } catch (NumberFormatException e) {
             return null;
         }

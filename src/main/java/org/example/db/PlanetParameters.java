@@ -10,7 +10,7 @@ import org.example.api.le_systeme_solarie.Moon;
 @ToString
 @AllArgsConstructor
 public class PlanetParameters {
-    private String id;
+    private Long id;
     private String englishName;
     private Double semimajorAxis;
     private Moon[] moons;

@@ -9,20 +9,30 @@ import java.util.Optional;
 
 public class PlanetsDetailsDB {
     //TODO: Trzeba zrobić cały C.R.U.D oraz testy !!! :(
-    private static final Map<Integer, PlanetDataEntity> dataBase = new HashMap<>();
-    private static Integer PLANET_DATA_ENTITY_ID = 1;
-    private static Integer MOON_DATA_ENTITY_ID = 1;
+    private static final Map<Long, PlanetDataEntity> dataBase = new HashMap<>();
+    private static Long PLANET_DATA_ENTITY_ID = 1L;
+    private static Long MOON_DATA_ENTITY_ID = 1L;
 
-    public Optional<PlanetDataEntity> getId(Integer id){return Optional.ofNullable(dataBase.get(id));
+    public Optional<PlanetDataEntity> getId(Long id){return Optional.ofNullable(dataBase.get(id));
     }
-  //  public PlanetDataEntity add(PlanetDataEntity planetData){
-  //  }
+    public PlanetDataEntity add(PlanetDataEntity entity) {
+        return dataBase.put(entity.getId(), entity);
 
-  // public PlanetDataEntity change(PlanetDataEntity planetDataEntity){
-  //
-  // }
+    }
 
-    public void delete(Integer id) {
+    public PlanetDataEntity update(PlanetDataEntity planetDataEntity) {
+        final PlanetDataEntity toChange = dataBase.get(planetDataEntity.getId());
+        //edytowanie
+        toChange.setId(planetDataEntity.getId());
+        toChange.setPlanet(planetDataEntity.isPlanet());
+        toChange.setEnglishName(planetDataEntity.getEnglishName());
+        toChange.setParameters(planetDataEntity.getParameters());
+        return dataBase.put(planetDataEntity.getId(), toChange);
+
+
+    }
+
+    public void delete(Long id) {
         dataBase.remove(id);
     }
 

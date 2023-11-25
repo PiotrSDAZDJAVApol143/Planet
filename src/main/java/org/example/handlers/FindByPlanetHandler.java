@@ -2,6 +2,7 @@ package org.example.handlers;
 
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 import org.example.db.PlanetDataEntity;
+import org.example.db.PlanetDataEntityMapper;
 import org.example.services.PlanetService;
 
 import java.util.Scanner;
@@ -16,16 +17,16 @@ public class FindByPlanetHandler {
         final SolarSystemPlanetDetailsResponse solarSystemDetails;
         if(isThisPlanetCached(userInputPlanetToFind)){
             final PlanetDataEntity planetByName = DATA_BASE.getPlanetByName(userInputPlanetToFind).orElseThrow();
-            solarSystemDetails =
+            solarSystemDetails = PlanetDataEntityMapper.toSolarResponse(planetByName);
         } else {
             solarSystemDetails = new PlanetService().getPlanetDetailsFromSystemeSolarie(userInputPlanetToFind);
         }String message = """
 							------------------------------
 							Planet/Moon details :
 							- englishName: 		[%s]
-							- meanRadius:		[%s]
-							- semimajorAxis: 	[%s]
-							- gravity: 		    [%s]
+							- meanRadius:		[%s km]
+							- semimajorAxis: 	[%s km]
+							- gravity: 		    [%s m/s²]
 							""".formatted(
                 solarSystemDetails.getEnglishName(),
                 solarSystemDetails.getMeanRadius(),
