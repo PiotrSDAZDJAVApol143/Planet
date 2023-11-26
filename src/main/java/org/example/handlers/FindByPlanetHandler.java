@@ -1,15 +1,12 @@
 package org.example.handlers;
 
-import org.example.api.le_systeme_solarie.Moon;
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 import org.example.db.PlanetDataEntity;
 import org.example.db.PlanetDataEntityMapper;
 import org.example.handlers.math.DataClarityConverter;
 import org.example.services.PlanetService;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import static org.example.Main.DATA_BASE;
 import static org.example.handlers.math.DataClarityConverter.convertAroundPlanetForMoon;
@@ -31,7 +28,7 @@ public class FindByPlanetHandler {
             solarSystemDetails = new PlanetService().getPlanetDetailsFromSystemeSolarie(userInputPlanetToFind);
         }
 
-        if(solarSystemDetails.getBodyType().equals("Planet")) {
+        if (solarSystemDetails.getBodyType().equals("Planet")) {
 
             String moonsList = DataClarityConverter.convertMoonsList(solarSystemDetails.getMoons());
 
@@ -40,7 +37,7 @@ public class FindByPlanetHandler {
                     Planet details :
                     - English name:                 [%s]
                     - Body type:                    [%s]
-                    - meanRadius:                   [%s km]
+                    - Mean radius:                  [%s km]
                     - Average temperature:          [%s C]
                     - Average distance from Sun:    [%s km]
                     - One year lasts:               [%s days]
@@ -70,8 +67,8 @@ public class FindByPlanetHandler {
                     Moon details :
                     - English name:                    [%s]
                     - Body type:                       [%s]
-                    - meanRadius:                      [%s km]
-                    - Average temperature:             [%s C]
+                    - Mean radius:                     [%s km]
+                    - Average temperature:             [%s °C]
                     - Average distance from Planet:    [%s km]
                     - Around Planet:                   [%s]
                     - One year lasts:                  [%s days]
@@ -79,7 +76,7 @@ public class FindByPlanetHandler {
                     - Gravity:                         [%s m/s²]
                     - Discovered by:                   [%s]
                     - Discovered date:                 [%s]
-                    
+                                        
                     """.formatted(
                     solarSystemDetails.getEnglishName(),
                     solarSystemDetails.getBodyType(),
@@ -94,14 +91,85 @@ public class FindByPlanetHandler {
                     solarSystemDetails.getDiscoveryDate()
             );
             System.out.println(messageMoon);
+        } else if (solarSystemDetails.getBodyType().equals("Comet")) {
+            String messageComet = """
+                    ------------------------------
+                    Planet details :
+                    - English name:                 [%s]
+                    - Body type:                    [%s]
+                    - Mean radius:                  [%s km]
+                    - Average distance from Sun:    [%s km]
+                    - Discovered by:                [%s]
+                    - Discovered date:              [%s]
+
+                    """.formatted(
+                    solarSystemDetails.getEnglishName(),
+                    solarSystemDetails.getBodyType(),
+                    solarSystemDetails.getMeanRadius(),
+                    formatDistance(solarSystemDetails.getSemimajorAxis()),
+                    solarSystemDetails.getDiscoveredBy(),
+                    solarSystemDetails.getDiscoveryDate());
+            System.out.println(messageComet);
+
+        } else if (solarSystemDetails.getBodyType().equals("Dwarf Planet")) {
+            String moonsList = DataClarityConverter.convertMoonsList(solarSystemDetails.getMoons());
+            String messageDwarfPlanet = """
+                    ------------------------------
+                    Planet details :
+                    - English name:                 [%s]
+                    - Body type:                    [%s]
+                    - Mean radius:                  [%s km]
+                    - Average temperature:          [%s C]
+                    - Average distance from Sun:    [%s km]
+                    - One year lasts:               [%s days]
+                    - Gravity:                      [%s m/s²]
+                    - Discovered by:                [%s]
+                    - Discovered date:              [%s]
+                    - Moons:                        [%s]
+                    """.formatted(
+                    solarSystemDetails.getEnglishName(),
+                    solarSystemDetails.getBodyType(),
+                    solarSystemDetails.getMeanRadius(),
+                    kelvinToCelsius(solarSystemDetails.getAvgTemp()),
+                    formatDistance(solarSystemDetails.getSemimajorAxis()),
+                    solarSystemDetails.getSideralOrbit(),
+                    solarSystemDetails.getGravity(),
+                    solarSystemDetails.getDiscoveredBy(),
+                    solarSystemDetails.getDiscoveryDate(),
+                    moonsList
+            );
+            System.out.println(messageDwarfPlanet);
+
+        } else if (solarSystemDetails.getBodyType().equals("Asteroid")) {
+            String messageAsteroid = """
+                    ------------------------------
+                    Planet details :
+                    - English name:                 [%s]
+                    - Body type:                    [%s]
+                    - Mean radius:                  [%s km]
+                    - Average distance from Sun:    [%s km]
+                    - One year lasts:               [%s days]
+                    - Discovered by:                [%s]
+                    - Discovered date:              [%s]
+                    """.formatted(
+                    solarSystemDetails.getEnglishName(),
+                    solarSystemDetails.getBodyType(),
+                    solarSystemDetails.getMeanRadius(),
+                    formatDistance(solarSystemDetails.getSemimajorAxis()),
+                    solarSystemDetails.getSideralOrbit(),
+                    solarSystemDetails.getDiscoveredBy(),
+                    solarSystemDetails.getDiscoveryDate()
+            );
+            System.out.println(messageAsteroid);
 
         }
     }
+
     //TODO:Jest jeszcze sporo poprawek do zrobienia
     // Stworzenie logiki wykrywającej gdy zmienna zwraca 0 - wyświetlać powinna wtedy "brak danych"
 
 
-    private boolean isThisPlanetCached(String userInputPlanetToFind){
+    private boolean isThisPlanetCached(String userInputPlanetToFind) {
         return DATA_BASE.existsByName(userInputPlanetToFind);
     }
 }
