@@ -29,38 +29,73 @@ public class FindByPlanetHandler {
             solarSystemDetails = new PlanetService().getPlanetDetailsFromSystemeSolarie(userInputPlanetToFind);
         }
 
-        String moonsList = Arrays.stream(solarSystemDetails.getMoons())
-                .map(Moon::getMoon)
-                .collect(Collectors.joining(", "));
+        if(solarSystemDetails.getBodyType().equals("Planet")) {
 
-        String message = """
-                            ------------------------------
-                            Planet/Moon details :
-                            - English name:        [%s]
-                            - Body type:           [%s]
-                            - meanRadius:          [%s km]
-                            - Average temperature: [%s C]
-                            - Average distance:    [%s km]
-                            - One year lasts:      [%s days]
-                            - One day lasts:       [%s h]
-                            - Gravity:             [%s m/s²]
-                            - Discovered by:       [%s]
-                            - Discovered date:     [%s]
-                            - Moons:               [%s]
-                            """.formatted(
-                solarSystemDetails.getEnglishName(),
-                solarSystemDetails.getBodyType(),
-                solarSystemDetails.getMeanRadius(),
-                kelvinToCelsius(solarSystemDetails.getAvgTemp()),
-                formatDistance(solarSystemDetails.getSemimajorAxis()),
-                solarSystemDetails.getSideralOrbit(),
-                solarSystemDetails.getSideralRotation(),
-                solarSystemDetails.getGravity(),
-                solarSystemDetails.getDiscoveredBy(),
-                solarSystemDetails.getDiscoveryDate(),
-                moonsList
-        );
-        System.out.println(message);
+            String moonsList = Arrays.stream(solarSystemDetails.getMoons())
+                    .map(Moon::getMoon)
+                    .collect(Collectors.joining(", "));
+
+            String message = """
+                    ------------------------------
+                    Planet details :
+                    - English name:                 [%s]
+                    - Body type:                    [%s]
+                    - meanRadius:                   [%s km]
+                    - Average temperature:          [%s C]
+                    - Average distance from Sun:    [%s km]
+                    - One year lasts:               [%s days]
+                    - One day lasts:                [%s h]
+                    - Gravity:                      [%s m/s²]
+                    - Discovered by:                [%s]
+                    - Discovered date:              [%s]
+                    - Moons:                        [%s]
+                    """.formatted(
+                    solarSystemDetails.getEnglishName(),
+                    solarSystemDetails.getBodyType(),
+                    solarSystemDetails.getMeanRadius(),
+                    kelvinToCelsius(solarSystemDetails.getAvgTemp()),
+                    formatDistance(solarSystemDetails.getSemimajorAxis()),
+                    solarSystemDetails.getSideralOrbit(),
+                    solarSystemDetails.getSideralRotation(),
+                    solarSystemDetails.getGravity(),
+                    solarSystemDetails.getDiscoveredBy(),
+                    solarSystemDetails.getDiscoveryDate(),
+                    moonsList
+            );
+            System.out.println(message);
+        } else if (solarSystemDetails.getBodyType().equals("Moon")) {
+
+            String messageMoon = """
+                    ------------------------------
+                    Moon details :
+                    - English name:                    [%s]
+                    - Body type:                       [%s]
+                    - meanRadius:                      [%s km]
+                    - Average temperature:             [%s C]
+                    - Average distance from Planet:    [%s km]
+                    - Around Planet:                   [%s]
+                    - One year lasts:                  [%s days]
+                    - One day lasts:                   [%s h]
+                    - Gravity:                         [%s m/s²]
+                    - Discovered by:                   [%s]
+                    - Discovered date:                 [%s]
+                    
+                    """.formatted(
+                    solarSystemDetails.getEnglishName(),
+                    solarSystemDetails.getBodyType(),
+                    solarSystemDetails.getMeanRadius(),
+                    kelvinToCelsius(solarSystemDetails.getAvgTemp()),
+                    formatDistance(solarSystemDetails.getSemimajorAxis()),
+                    solarSystemDetails.getAroundPlanet(),
+                    solarSystemDetails.getSideralOrbit(),
+                    solarSystemDetails.getSideralRotation(),
+                    solarSystemDetails.getGravity(),
+                    solarSystemDetails.getDiscoveredBy(),
+                    solarSystemDetails.getDiscoveryDate()
+            );
+            System.out.println(messageMoon);
+
+        }
     }
     //TODO:Jest jeszcze sporo poprawek do zrobienia
     // - wyświetlanie informacji - Zamiana Kelvinów na Celsjusze
