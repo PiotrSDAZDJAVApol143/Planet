@@ -4,6 +4,7 @@ import org.example.api.le_systeme_solarie.Moon;
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 import org.example.db.PlanetDataEntity;
 import org.example.db.PlanetDataEntityMapper;
+import org.example.handlers.math.DataClarityConverter;
 import org.example.services.PlanetService;
 
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static org.example.Main.DATA_BASE;
+import static org.example.handlers.math.DataClarityConverter.convertAroundPlanetForMoon;
 import static org.example.handlers.math.DistanceFormatter.formatDistance;
 import static org.example.handlers.math.TemperatureConverter.kelvinToCelsius;
 
@@ -31,9 +33,7 @@ public class FindByPlanetHandler {
 
         if(solarSystemDetails.getBodyType().equals("Planet")) {
 
-            String moonsList = Arrays.stream(solarSystemDetails.getMoons())
-                    .map(Moon::getMoon)
-                    .collect(Collectors.joining(", "));
+            String moonsList = DataClarityConverter.convertMoonsList(solarSystemDetails.getMoons());
 
             String message = """
                     ------------------------------
@@ -86,7 +86,7 @@ public class FindByPlanetHandler {
                     solarSystemDetails.getMeanRadius(),
                     kelvinToCelsius(solarSystemDetails.getAvgTemp()),
                     formatDistance(solarSystemDetails.getSemimajorAxis()),
-                    solarSystemDetails.getAroundPlanet(),
+                    convertAroundPlanetForMoon(solarSystemDetails.getAroundPlanet()),
                     solarSystemDetails.getSideralOrbit(),
                     solarSystemDetails.getSideralRotation(),
                     solarSystemDetails.getGravity(),
@@ -98,9 +98,7 @@ public class FindByPlanetHandler {
         }
     }
     //TODO:Jest jeszcze sporo poprawek do zrobienia
-    // - wyświetlanie informacji - Zamiana Kelvinów na Celsjusze
-    // - formatowanie dystansu. Obecnie pokazuje albo średnią odległość od Słońca albo średnią odległość od planety
-    // jeśli to księżyc. Sam zapis też jest mało czytelny chyba wolałbym widzieć 2 870 658 186 km niż: 2.870658186E9 km
+    // Stworzenie logiki wykrywającej gdy zmienna zwraca 0 - wyświetlać powinna wtedy "brak danych"
 
 
     private boolean isThisPlanetCached(String userInputPlanetToFind){
