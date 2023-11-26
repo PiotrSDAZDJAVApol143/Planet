@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static org.example.Main.DATA_BASE;
+import static org.example.handlers.math.DistanceFormatter.formatDistance;
 import static org.example.handlers.math.TemperatureConverter.kelvinToCelsius;
 
 public class FindByPlanetHandler {
@@ -51,7 +52,7 @@ public class FindByPlanetHandler {
                 solarSystemDetails.getBodyType(),
                 solarSystemDetails.getMeanRadius(),
                 kelvinToCelsius(solarSystemDetails.getAvgTemp()),
-                solarSystemDetails.getSemimajorAxis(),
+                formatDistance(solarSystemDetails.getSemimajorAxis()),
                 solarSystemDetails.getSideralOrbit(),
                 solarSystemDetails.getSideralRotation(),
                 solarSystemDetails.getGravity(),
