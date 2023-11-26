@@ -7,11 +7,11 @@ import org.example.db.PlanetDataEntityMapper;
 import org.example.services.PlanetService;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static org.example.Main.DATA_BASE;
+import static org.example.handlers.math.TemperatureConverter.kelvinToCelsius;
 
 public class FindByPlanetHandler {
     public void handle() {
@@ -28,13 +28,17 @@ public class FindByPlanetHandler {
             solarSystemDetails = new PlanetService().getPlanetDetailsFromSystemeSolarie(userInputPlanetToFind);
         }
 
+        String moonsList = Arrays.stream(solarSystemDetails.getMoons())
+                .map(Moon::getMoon)
+                .collect(Collectors.joining(", "));
+
         String message = """
                             ------------------------------
                             Planet/Moon details :
                             - English name:        [%s]
                             - Body type:           [%s]
                             - meanRadius:          [%s km]
-                            - Average temperature: [%s K]
+                            - Average temperature: [%s C]
                             - Average distance:    [%s km]
                             - One year lasts:      [%s days]
                             - One day lasts:       [%s h]
@@ -46,17 +50,21 @@ public class FindByPlanetHandler {
                 solarSystemDetails.getEnglishName(),
                 solarSystemDetails.getBodyType(),
                 solarSystemDetails.getMeanRadius(),
-                solarSystemDetails.getAvgTemp(),
+                kelvinToCelsius(solarSystemDetails.getAvgTemp()),
                 solarSystemDetails.getSemimajorAxis(),
                 solarSystemDetails.getSideralOrbit(),
                 solarSystemDetails.getSideralRotation(),
                 solarSystemDetails.getGravity(),
                 solarSystemDetails.getDiscoveredBy(),
                 solarSystemDetails.getDiscoveryDate(),
-                Arrays.toString(solarSystemDetails.getMoons())
+                moonsList
         );
         System.out.println(message);
     }
+    //TODO:Jest jeszcze sporo poprawek do zrobienia
+    // - wyświetlanie informacji - Zamiana Kelvinów na Celsjusze
+    // - formatowanie dystansu. Obecnie pokazuje albo średnią odległość od Słońca albo średnią odległość od planety
+    // jeśli to księżyc. Sam zapis też jest mało czytelny chyba wolałbym widzieć 2 870 658 186 km niż: 2.870658186E9 km
 
 
     private boolean isThisPlanetCached(String userInputPlanetToFind){
