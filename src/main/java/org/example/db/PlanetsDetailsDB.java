@@ -1,17 +1,17 @@
 package org.example.db;
 
-import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class PlanetsDetailsDB {
     //TODO: Trzeba zrobić cały C.R.U.D oraz testy !!! :(
     private static final Map<Long, PlanetDataEntity> dataBase = new HashMap<>();
     private static Long PLANET_DATA_ENTITY_ID = 1L;
     private static Long MOON_DATA_ENTITY_ID = 1L;
+
+    public Map showAll() {
+        System.out.println(dataBase);
+        return dataBase;
+    }
 
     public Optional<PlanetDataEntity> getId(Long id){return Optional.ofNullable(dataBase.get(id));
     }
