@@ -2,7 +2,9 @@ package org.example;
 
 import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 import org.example.db.PlanetsDetailsDB;
+import org.example.handlers.CheckWeigtOnPlanetHandler;
 import org.example.handlers.FindByPlanetHandler;
+import org.example.handlers.ImportIdNameHandler;
 import org.example.services.PlanetService;
 
 import java.util.Scanner;
@@ -12,6 +14,7 @@ public class Main {
     public static void main(String[] args) {
         var isRunning = true;
         var isFirstRun = true;
+        PlanetService planetService = new PlanetService();
         while (isRunning) {
             isFirstRun = showWelcomeMenu(isFirstRun);
             Scanner sc = new Scanner(System.in);
@@ -20,6 +23,7 @@ public class Main {
             switch (userInput) {
                 case "Q" -> isRunning = false;
                 case "P" -> new FindByPlanetHandler().handle();
+                case "W" -> new CheckWeigtOnPlanetHandler().weightHandle();
                 default -> System.out.println("ERROR!!! INVALID INPUT");
             }
             }
