@@ -24,6 +24,7 @@ public class Main {
                 case "Q" -> isRunning = false;
                 case "P" -> new FindByPlanetHandler().handle();
                 case "W" -> new CheckWeigtOnPlanetHandler().weightHandle();
+                case "D" -> System.out.println("Under Construction..."); // do zrobienia
                 default -> System.out.println("ERROR!!! INVALID INPUT");
             }
             }
