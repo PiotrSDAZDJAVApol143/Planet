@@ -7,6 +7,7 @@ public class PlanetsDetailsDB {
     private static final Map<Long, PlanetDataEntity> dataBase = new HashMap<>();
     private static Long PLANET_DATA_ENTITY_ID = 1L;
     private static Long MOON_DATA_ENTITY_ID = 1L;
+    Scanner input = new Scanner(System.in);
 
     public Map showAll() {
         System.out.println(dataBase);
@@ -20,17 +21,19 @@ public class PlanetsDetailsDB {
 
     }
 
-    public PlanetDataEntity update(PlanetDataEntity planetDataEntity) {
-        final PlanetDataEntity toChange = dataBase.get(planetDataEntity.getId());
-        //edytowanie
-        toChange.setId(planetDataEntity.getId());
-        toChange.setPlanet(planetDataEntity.isPlanet());
-        toChange.setEnglishName(planetDataEntity.getEnglishName());
-        toChange.setParameters(planetDataEntity.getParameters());
-        return dataBase.put(planetDataEntity.getId(), toChange);
-
-
+    public void update(Long id, Scanner input) {
+        this.input = input;
+        PlanetDataEntity planetToChange = dataBase.get(id);
+        System.out.println("Planet to change: " + planetToChange);
+        System.out.println("----------");
+        System.out.println("Current Englishname is: " + planetToChange.getEnglishName());
+        System.out.println("Set new EnglishName");
+        String newEnglishName = input.next();
+        planetToChange.setEnglishName(newEnglishName);
+        Optional<PlanetDataEntity> updatedPlanet = Optional.of(new PlanetDataEntity());
+        System.out.println(getId(id));
     }
+
 
     public void delete(Long id) {
         dataBase.remove(id);
