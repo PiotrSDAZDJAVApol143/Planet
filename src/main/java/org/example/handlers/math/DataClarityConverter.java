@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class DataClarityConverter {
     public static String convertMoonsList(Moon[] moons) {
+        if (moons == null) {
+            return "Planet has no moons";
+        }
         return Arrays.stream(moons)
                 .map(Moon::getMoon)
                 .collect(Collectors.joining(", "));
