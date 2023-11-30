@@ -1,10 +1,8 @@
 package org.example;
 
-import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
 import org.example.db.PlanetsDetailsDB;
 import org.example.handlers.CheckWeigtOnPlanetHandler;
 import org.example.handlers.FindByPlanetHandler;
-import org.example.handlers.ImportIdNameHandler;
 import org.example.services.PlanetService;
 
 import java.util.Scanner;
