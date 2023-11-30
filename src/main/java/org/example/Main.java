@@ -1,15 +1,28 @@
 package org.example;
 
+import org.example.api.le_systeme_solarie.SolarSystemPlanetDetailsResponse;
+import org.example.db.PlanetDataEntity;
+import org.example.db.PlanetDataEntityMapper;
 import org.example.db.PlanetsDetailsDB;
 import org.example.handlers.CheckWeigtOnPlanetHandler;
 import org.example.handlers.FindByPlanetHandler;
 import org.example.services.PlanetService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static final PlanetsDetailsDB DATA_BASE = new PlanetsDetailsDB();
     public static void main(String[] args) {
+        final List<String> planetFromSolarSystem = List.of(//"Mercury","Venus",
+                "Earth", "Mars", "Jupiter", "Saturn", "Uranus"
+                ,"Neptune");
+        planetFromSolarSystem.stream()
+                .forEach(planetName-> {
+                            final SolarSystemPlanetDetailsResponse response = new PlanetService().getPlanetDetailsFromSystemeSolarie(planetName);
+                            final PlanetDataEntity entity = PlanetDataEntityMapper.from(response);
+                            DATA_BASE.add(entity);
+                        });
         var isRunning = true;
         var isFirstRun = true;
         PlanetService planetService = new PlanetService();

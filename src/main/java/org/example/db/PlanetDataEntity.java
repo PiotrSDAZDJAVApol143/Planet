@@ -10,7 +10,7 @@ import lombok.Setter;
 public class PlanetDataEntity {
     private Long id;
     private String englishName;
-    private boolean isPlanet;
+    private String bodyType;
     private PlanetParameters parameters;
 
     public PlanetDataEntity(Long id, String englishName, boolean isPlanet, PlanetParameters parameters) {
