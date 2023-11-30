@@ -12,7 +12,7 @@ import java.util.List;
 public class PlanetDataEntity {
     private Long id;
     private String englishName;
-    private boolean isPlanet;
+    private String bodyType;
     private PlanetParameters parameters;
 
 }

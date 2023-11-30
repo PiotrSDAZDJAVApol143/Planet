@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
 public class PlanetDataEntityMapper {
 
     public static PlanetDataEntity from(SolarSystemPlanetDetailsResponse dto) {
-        PlanetParameters parameters = new PlanetParameters(
+        return new PlanetDataEntity(null, dto.getEnglishName(), dto.getBodyType(),
+         new PlanetParameters(
                 dto.getNumericId(),
                 dto.getEnglishName(),
                 dto.getBodyType(),
@@ -26,13 +27,7 @@ public class PlanetDataEntityMapper {
                 dto.getSemimajorAxis(),
                 dto.getMeanRadius(),
                 dto.getAroundPlanet()
-        );
-        return new PlanetDataEntity(
-                parameters.getId(),
-                parameters.getEnglishName(),
-                dto.isPlanet(),
-                parameters
-        );
+        ));
     }
     public static SolarSystemPlanetDetailsResponse toSolarResponse (PlanetDataEntity entity){
         final PlanetParameters planetParameters = entity.getParameters();

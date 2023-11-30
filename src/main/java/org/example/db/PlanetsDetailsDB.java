@@ -24,7 +24,7 @@ public class PlanetsDetailsDB {
         final PlanetDataEntity toChange = dataBase.get(planetDataEntity.getId());
         //edytowanie
         toChange.setId(planetDataEntity.getId());
-        toChange.setPlanet(planetDataEntity.isPlanet());
+        toChange.setBodyType(planetDataEntity.getBodyType());
         toChange.setEnglishName(planetDataEntity.getEnglishName());
         toChange.setParameters(planetDataEntity.getParameters());
         return dataBase.put(planetDataEntity.getId(), toChange);
