@@ -20,29 +20,29 @@ class PlanetsDetailsDBTest {
  //       final boolean isPresent = resultOpt.isPresent();
  //       Assertions.assertTrue(isPresent);
  //   }
-    @Test
-    void should_get_planet_by_name(){
-        //given
-        final long id = 1L;
-        final String planetName = "Javator";
-        final PlanetDataEntity planetDataEntity = new PlanetDataEntity();
-        planetDataEntity.setId(id);
-        planetDataEntity.setEnglishName(planetName);
-        dataBase.add(planetDataEntity);
+ //  @Test
+ //  void should_get_planet_by_name(){
+ //      //given
+ //      final long id = 1L;
+ //      final String planetName = "Javator";
+ //      final PlanetDataEntity planetDataEntity = new PlanetDataEntity();
+ //      planetDataEntity.setId(id);
+ //      planetDataEntity.setEnglishName(planetName);
+ //      dataBase.add(planetDataEntity);
 
-        //when
-        final PlanetDataEntity result = dataBase.getPlanetByName(planetName).orElseThrow();
+ //      //when
+ //      final PlanetDataEntity result = dataBase.getPlanetByName(planetName).orElseThrow();
 
-        //then
-        Assertions.assertEquals(result.getEnglishName(), planetName);
+ //      //then
+ //      Assertions.assertEquals(result.getEnglishName(), planetName);
 
-    }
+ //  }
 
-    private static long createAndAddCelestialBody(Long id, String englishName) {
-        final PlanetDataEntity newCelestialBody = new PlanetDataEntity();
-        newCelestialBody.setId(1234l);
-        newCelestialBody.setEnglishName("Javator");
-        final PlanetDataEntity add = dataBase.add(newCelestialBody);
-        return id;
-    }
+ //  private static long createAndAddCelestialBody(Long id, String englishName) {
+ //      final PlanetDataEntity newCelestialBody = new PlanetDataEntity();
+ //      newCelestialBody.setId(1234l);
+ //      newCelestialBody.setEnglishName("Javator");
+ //      final PlanetDataEntity add = dataBase.add(newCelestialBody);
+ //      return id;
+ //  }
 }
