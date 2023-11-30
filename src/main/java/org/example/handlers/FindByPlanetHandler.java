@@ -9,7 +9,6 @@ import org.example.services.PlanetService;
 import java.util.Scanner;
 
 import static org.example.Main.DATA_BASE;
-import static org.example.handlers.math.DataClarityConverter.convertAroundPlanetForMoon;
 import static org.example.handlers.math.DistanceFormatter.formatDistance;
 import static org.example.handlers.math.TemperatureConverter.kelvinToCelsius;
 
@@ -29,68 +28,9 @@ public class FindByPlanetHandler {
         }
 
         if (solarSystemDetails.getBodyType().equals("Planet")) {
-
-            String moonsList = DataClarityConverter.convertMoonsList(solarSystemDetails.getMoons());
-
-            String message = """
-                    ------------------------------
-                    Planet details :
-                    - English name:                 [%s]
-                    - Body type:                    [%s]
-                    - Mean radius:                  [%s km]
-                    - Average temperature:          [%s C]
-                    - Average distance from Sun:    [%s km]
-                    - One year lasts:               [%s days]
-                    - One day lasts:                [%s h]
-                    - Gravity:                      [%s m/s²]
-                    - Discovered by:                [%s]
-                    - Discovered date:              [%s]
-                    - Moons:                        [%s]
-                    """.formatted(
-                    solarSystemDetails.getEnglishName(),
-                    solarSystemDetails.getBodyType(),
-                    solarSystemDetails.getMeanRadius(),
-                    kelvinToCelsius(solarSystemDetails.getAvgTemp()),
-                    formatDistance(solarSystemDetails.getSemimajorAxis()),
-                    solarSystemDetails.getSideralOrbit(),
-                    solarSystemDetails.getSideralRotation(),
-                    solarSystemDetails.getGravity(),
-                    solarSystemDetails.getDiscoveredBy(),
-                    solarSystemDetails.getDiscoveryDate(),
-                    moonsList
-            );
-            System.out.println(message);
+            new PlanetHandler(solarSystemDetails).handle();
         } else if (solarSystemDetails.getBodyType().equals("Moon")) {
-
-            String messageMoon = """
-                    ------------------------------
-                    Moon details :
-                    - English name:                    [%s]
-                    - Body type:                       [%s]
-                    - Mean radius:                     [%s km]
-                    - Average temperature:             [%s °C]
-                    - Average distance from Planet:    [%s km]
-                    - Around Planet:                   [%s]
-                    - One year lasts:                  [%s days]
-                    - One day lasts:                   [%s h]
-                    - Gravity:                         [%s m/s²]
-                    - Discovered by:                   [%s]
-                    - Discovered date:                 [%s]
-                                        
-                    """.formatted(
-                    solarSystemDetails.getEnglishName(),
-                    solarSystemDetails.getBodyType(),
-                    solarSystemDetails.getMeanRadius(),
-                    kelvinToCelsius(solarSystemDetails.getAvgTemp()),
-                    formatDistance(solarSystemDetails.getSemimajorAxis()),
-                    convertAroundPlanetForMoon(solarSystemDetails.getAroundPlanet()),
-                    solarSystemDetails.getSideralOrbit(),
-                    solarSystemDetails.getSideralRotation(),
-                    solarSystemDetails.getGravity(),
-                    solarSystemDetails.getDiscoveredBy(),
-                    solarSystemDetails.getDiscoveryDate()
-            );
-            System.out.println(messageMoon);
+            new MoonHandler(solarSystemDetails).handle();
         } else if (solarSystemDetails.getBodyType().equals("Comet")) {
             String messageComet = """
                     ------------------------------
