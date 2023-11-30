@@ -68,7 +68,11 @@ public class PlanetService {
     }
 
     private static String searchMapToFindID(String planetName) {
-        return solarSystemMap.get(planetName);
+        String id = solarSystemMap.get(planetName);
+        if (id == null) {
+            throw new RuntimeException("Planet not found: " + planetName);
+        }
+        return id;
     }
 }
 

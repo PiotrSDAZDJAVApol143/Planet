@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class Main {
     public static final PlanetsDetailsDB DATA_BASE = new PlanetsDetailsDB();
     public static void main(String[] args) {
-        final List<String> planetFromSolarSystem = List.of(//"Mercury","Venus",
+        final List<String> planetFromSolarSystem = List.of("Mercury","Venus",
                 "Earth", "Mars", "Jupiter", "Saturn", "Uranus"
-                ,"Neptune");
+                , "Neptune");
         planetFromSolarSystem.stream()
                 .forEach(planetName-> {
                             final SolarSystemPlanetDetailsResponse response = new PlanetService().getPlanetDetailsFromSystemeSolarie(planetName);
@@ -39,7 +39,10 @@ public class Main {
                 default -> System.out.println("ERROR!!! INVALID INPUT");
             }
             }
-        }
+        //test ile obiektów jest w db
+        System.out.println(planetFromSolarSystem.size());
+
+    }
 
 
     private static boolean showWelcomeMenu(boolean isFirstRun) {
